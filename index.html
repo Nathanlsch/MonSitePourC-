@@ -5,17 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrôle ESP8266</title>
     <style>
-        /* Ajoute ton CSS ici pour le style de la page */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <!-- Ajoute tes boutons ici -->
-    <button id="bouton1">Action 1</button>
-    <button id="bouton2">Action 2</button>
+    <h1>Contrôle ESP8266</h1>
+    <button onclick="sendCommand('action1')">Action 1</button>
+    <button onclick="sendCommand('action2')">Action 2</button>
 
-    <!-- Ajoute des scripts pour interagir avec l'ESP8266 -->
     <script>
-        // Ajoute ton JavaScript ici
+        function sendCommand(action) {
+            // Envoie une requête au serveur ESP8266
+            fetch(`/action/${action}`, { method: 'POST' })
+                .then(response => console.log(`Commande "${action}" envoyée avec succès`))
+                .catch(error => console.error('Erreur lors de l\'envoi de la commande:', error));
+        }
     </script>
 </body>
 </html>
