@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrôle ESP8266</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        button {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Contrôle ESP8266</h1>
-    <button onclick="sendCommand('action1')">Action 1</button>
-    <button onclick="sendCommand('action2')">Action 2</button>
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Commande LED</title>
+    </head>
+    <body>
+        <h1>Etat de la LED</h1>
+        <h2 id="etatLED">%LED%</h2>
+        <h1>Commande de la LED</h1>
+        <button onclick="appelServeur('/switchLedOn', traiteReponse)">Allumer la LED</button>
+        <button onclick="appelServeur('/switchLedOff', traiteReponse)">Eteindre la LED</button>
 
-    <script>
-        function sendCommand(action) {
-            // Envoie une requête au serveur ESP8266
-            fetch(`/action/${action}`, { method: 'POST' })
-                .then(response => console.log(`Commande "${action}" envoyée avec succès`))
-                .catch(error => console.error('Erreur lors de l\'envoi de la commande:', error));
-        }
-    </script>
-</body>
+        <script>
+            function appelServeur(url, cFonction) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        cFonction(this);
+                    }
+                };
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            }
+            function traiteReponse(xhttp) {
+                document.getElementById("etatLED").innerHTML = "LED " + xhttp.responseText;
+            }
+        </script>
+    </body>
 </html>
