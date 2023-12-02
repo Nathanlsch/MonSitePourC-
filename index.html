@@ -1,30 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>Commande LED</title>
-    </head>
-    <body>
-        <h1>Etat de la LED</h1>
-        <h2 id="etatLED">%LED%</h2>
-        <h1>Commande de la LED</h1>
-        <button onclick="appelServeur('/switchLedOn', traiteReponse)">Allumer la LED</button>
-        <button onclick="appelServeur('/switchLedOff', traiteReponse)">Eteindre la LED</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interface utilisateur distributeur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
 
-        <script>
-            function appelServeur(url, cFonction) {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        cFonction(this);
-                    }
-                };
-                xhttp.open("GET", url, true);
-                xhttp.send();
-            }
-            function traiteReponse(xhttp) {
-                document.getElementById("etatLED").innerHTML = "LED " + xhttp.responseText;
-            }
-        </script>
-    </body>
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    #selectedTime {
+      margin-top: 20px;
+    }
+
+    #percentage {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Interface utilisateur distributeur</h1>
+
+  <button id="doseCroquetteButton">Dose croquette</button>
+
+  <div>
+    <label for="timeInput">Choisir l'heure :</label>
+    <input type="time" id="timeInput">
+    <button id="applyButton">Appliquer</button>
+  </div>
+
+  <div id="selectedTime"></div>
+
+  <div id="percentage">Niveau de croquette : <span id="croquetteLevel">0%</span></div>
+
+  <script>
+    document.getElementById('applyButton').addEventListener('click', function() {
+      var selectedTime = document.getElementById('timeInput').value;
+      document.getElementById('selectedTime').innerText = 'Heure sélectionnée : ' + selectedTime;
+
+      // Simuler le niveau de croquette avec un pourcentage aléatoire entre 0 et 100
+      var croquetteLevel = Math.floor(Math.random() * 101);
+      document.getElementById('croquetteLevel').innerText = croquetteLevel + '%';
+    });
+
+    document.getElementById('doseCroquetteButton').addEventListener('click', function() {
+      // Action à effectuer lorsqu'on clique sur le bouton "Dose croquette"
+      // Vous pouvez ajouter votre propre logique ici
+      alert('Action "Dose croquette" effectuée !');
+    });
+  </script>
+
+</body>
 </html>
