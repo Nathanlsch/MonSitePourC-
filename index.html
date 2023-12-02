@@ -39,12 +39,12 @@
 
   <h1>Interface utilisateur distributeur</h1>
 
-  <button id="doseCroquetteButton">Dose croquette</button>
+  <button id="doseCroquetteButton" onclick="appelServeur('/doseCroquette', traiteReponseDose)">Dose croquette</button>
 
   <div>
     <label for="timeInput">Choisir l'heure :</label>
     <input type="time" id="timeInput">
-    <button id="applyButton">Appliquer</button>
+    <button id="applyButton" onclick="appliquerHeure()">Appliquer</button>
   </div>
 
   <div id="selectedTime"></div>
@@ -52,20 +52,29 @@
   <div id="percentage">Niveau de croquette : <span id="croquetteLevel">0%</span></div>
 
   <script>
-    document.getElementById('applyButton').addEventListener('click', function() {
+    function appelServeur(url, cFonction) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          cFonction(this);
+        }
+      };
+      xhttp.open("GET", url, true);
+      xhttp.send();
+    }
+
+    function traiteReponseDose(xhttp) {
+      alert("Dose de croquette effectuée !");
+    }
+
+    function appliquerHeure() {
       var selectedTime = document.getElementById('timeInput').value;
       document.getElementById('selectedTime').innerText = 'Heure sélectionnée : ' + selectedTime;
 
       // Simuler le niveau de croquette avec un pourcentage aléatoire entre 0 et 100
       var croquetteLevel = Math.floor(Math.random() * 101);
       document.getElementById('croquetteLevel').innerText = croquetteLevel + '%';
-    });
-
-    document.getElementById('doseCroquetteButton').addEventListener('click', function() {
-      // Action à effectuer lorsqu'on clique sur le bouton "Dose croquette"
-      // Vous pouvez ajouter votre propre logique ici
-      alert('Action "Dose croquette" effectuée !');
-    });
+    }
   </script>
 
 </body>
