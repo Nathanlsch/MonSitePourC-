@@ -1,81 +1,63 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interface utilisateur distributeur</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abyssal Room</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
 
-    h1 {
-      color: #333;
-    }
+        .header {
+            text-align: center;
+            padding: 50px;
+            background-image: url('background.jpg'); /* Remplacez 'background.jpg' par le chemin de votre image */
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
 
-    button {
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
-    }
+        .description {
+            padding: 20px;
+            text-align: justify;
+        }
 
-    input {
-      padding: 8px;
-      font-size: 14px;
-    }
+        .social-links {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    #selectedTime {
-      margin-top: 20px;
-    }
-
-    #percentage {
-      margin-top: 10px;
-    }
-  </style>
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Abyssal Room</h1>
+    </div>
 
-  <h1>Interface utilisateur distributeur</h1>
+    <div class="description">
+        <h2>Notre Groupe</h2>
+        <p>
+            Bienvenue sur la page officielle d'Abyssal Room. Nous sommes un groupe passionné par [insérez une brève description de votre groupe ici].
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ante eu orci bibendum pulvinar.
+            ...
+            <!-- Ajoutez votre description ici -->
+        </p>
+    </div>
 
-  <button id="doseCroquetteButton" onclick="appelServeur('/doseCroquette', traiteReponseDose)">Dose croquette</button>
-
-  <div>
-    <label for="timeInput">Choisir l'heure :</label>
-    <input type="time" id="timeInput">
-    <button id="applyButton" onclick="appliquerHeure()">Appliquer</button>
-  </div>
-
-  <div id="selectedTime"></div>
-
-  <div id="percentage">Niveau de croquette : <span id="croquetteLevel">0%</span></div>
-
-  <script>
-    function appelServeur(url, cFonction) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          cFonction(this);
-        }
-      };
-      xhttp.open("GET", url, true);
-      xhttp.send();
-    }
-
-    function traiteReponseDose(xhttp) {
-      alert("Dose de croquette effectuée !");
-    }
-
-    function appliquerHeure() {
-      var selectedTime = document.getElementById('timeInput').value;
-      document.getElementById('selectedTime').innerText = 'Heure sélectionnée : ' + selectedTime;
-
-      // Simuler le niveau de croquette avec un pourcentage aléatoire entre 0 et 100
-      var croquetteLevel = Math.floor(Math.random() * 101);
-      document.getElementById('croquetteLevel').innerText = croquetteLevel + '%';
-    }
-  </script>
-
+    <div class="social-links">
+        <a href="https://www.facebook.com/votrepage" target="_blank">Facebook</a>
+        <a href="https://www.twitter.com/votrecompte" target="_blank">Twitter</a>
+        <!-- Ajoutez d'autres liens vers vos réseaux sociaux ici -->
+    </div>
 </body>
 </html>
