@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #ff4d4d; /* Couleur de fond rouge pour ambiance Saint-Valentin */
         }
         .countdown {
             text-align: center;
@@ -33,7 +33,7 @@
 </head>
 <body>
     <div class="countdown">
-        <h1>Compte à rebours jusqu'à ce que la facture soit honoré</h1>
+        <h1>Compte à rebours jusqu'à ce que la facture soit honorée</h1>
         <p id="countdown"></p>
         <h1>Romane je veux te péter le cul</h1>
     </div>
@@ -64,7 +64,7 @@
             // Si le compte à rebours est terminé, écrivez du texte
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
+                document.getElementById("countdown").innerHTML = "EXPIRÉ";
             }
         }, 1000);
     </script>
